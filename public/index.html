@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#0d3b2a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="500">
+<title>500 – Card Game</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div id="app">
+  <!-- Home -->
+  <section id="home" class="screen">
+    <div class="home-card">
+      <div class="logo"><span>500</span></div>
+      <h1>Five Hundred</h1>
+      <p class="sub">Aussie 500 for 4 players · 2 teams · first to 500</p>
+      <label>Your name<input id="nameInput" maxlength="16" placeholder="e.g. Nathan" autocomplete="nickname"></label>
+      <button id="createBtn" class="btn primary big">Create a new game</button>
+      <div class="or">or join a mate's game</div>
+      <div class="row"><input id="codeInput" maxlength="4" placeholder="CODE" autocapitalize="characters"><button id="joinBtn" class="btn">Join</button></div>
+      <details class="rules"><summary>Rules used</summary><div id="rulesText"></div></details>
+    </div>
+  </section>
+
+  <!-- Game -->
+  <section id="game" class="screen hidden">
+    <header class="topbar">
+      <button id="codeChip" class="chip" title="Share invite">🔗 <b id="roomCode">----</b></button>
+      <div class="scores" id="scoreMini"></div>
+      <button id="scoresBtn" class="icon" title="Scores">📊</button>
+      <button id="chatBtn" class="icon" title="Chat">💬<span id="chatBadge" class="badge hidden">0</span></button>
+    </header>
+    <div id="conn" class="conn hidden">Reconnecting…</div>
+    <div class="main">
+      <div class="table" id="table">
+        <div id="lobby" class="lobby hidden"></div>
+        <div id="felt" class="felt hidden">
+          <div class="seat pos2" id="seat2"></div>
+          <div class="seat pos1" id="seat1"></div>
+          <div class="seat pos3" id="seat3"></div>
+          <div class="center">
+            <div id="contract" class="contract"></div>
+            <div id="trick" class="trick"></div>
+            <div id="openHand" class="openhand hidden"></div>
+          </div>
+          <div class="seat pos0" id="seat0"></div>
+        </div>
+        <div id="actions" class="actions"></div>
+        <div id="hand" class="hand"></div>
+      </div>
+      <aside id="chat" class="chat">
+        <div class="chat-head"><b>Chat</b><button id="chatClose" class="icon only-mobile">✕</button></div>
+        <div id="chatLog" class="chat-log"></div>
+        <div class="reacts" id="reacts"></div>
+        <form id="chatForm" class="chat-form"><input id="chatInput" maxlength="300" placeholder="Say something…" autocomplete="off"><button class="btn primary">Send</button></form>
+      </aside>
+    </div>
+  </section>
+
+  <div id="sheet" class="sheet hidden"><div class="sheet-body" id="sheetBody"></div></div>
+  <div id="overlay" class="overlay hidden"><div class="modal" id="modal"></div></div>
+  <div id="toast" class="toast hidden"></div>
+  <div id="floaters"></div>
+</div>
+<script src="/app.js"></script>
+</body>
+</html>

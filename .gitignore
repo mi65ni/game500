@@ -1,0 +1,10 @@
+node_modules
+bin
+data
+logs
+screens
+PUBLIC_URL.txt
+.env
+.env.*
+*.pem
+*.key
