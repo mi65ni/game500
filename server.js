@@ -295,7 +295,7 @@ wss.on('connection', (ws) => {
   });
   ws.on('close', () => { if (ws.room) { ws.room.conns.delete(ws); broadcast(ws.room); } });
 });
-setInterval(() => { for (const ws of wss.clients) { if (!ws.isAlive) { ws.terminate(); continue; } ws.isAlive = false; ws.ping(); } }, 25000);
+setInterval(() => { for (const ws of wss.clients) { if (!ws.isAlive) { ws.terminate(); continue; } ws.isAlive = false; ws.ping(); } }, 10000);
 
 load();
 for (const r of rooms.values()) { if (r.game.status === 'handover') { r.game.status = 'playing'; finishHandResume(r); } runBots(r); }

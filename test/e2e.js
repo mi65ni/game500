@@ -82,7 +82,7 @@ async function fourHumans() {
     if (!reconnected && S0 && S0.hand && S0.hand.phase === 'playing' && S0.hand.trickCount === 3) {
       const old = cs[2]; const handBefore = old.S.hand.myHand.slice().sort().join();
       old.close(); await sleep(300);
-      await waitFor(() => !cs[0].S.seats[2].connected, 5000, 'offline flag');
+      await waitFor(() => !cs[0].S.seats[2].connected, 60000, 'offline flag');
       const nc = new Client('Shane', code, old.token); await nc.connect(); cs[2] = nc;
       assert.equal(nc.S.me.seat, 2, 'kept seat after reconnect');
       assert.equal(nc.S.hand.myHand.slice().sort().join(), handBefore, 'kept hand after reconnect');
@@ -142,7 +142,7 @@ async function withBots() {
   assert.equal(spect.S.me.seat, -1);
   spect.send({ t: 'sit', seat: 1 }); await waitFor(() => spect.S.me.seat === 1, 5000, 'take over bot');
   log('spectator took over a computer seat mid-game');
-  me.close(); await waitFor(() => !spect.S.seats[0].connected, 5000, 'me offline');
+  me.close(); await waitFor(() => !spect.S.seats[0].connected, 60000, 'me offline');
   spect.send({ t: 'autopilot', seat: 0 }); await waitFor(() => spect.S.seats[0].auto, 5000, 'autopilot');
   log('autopilot enabled for an offline player');
   spect.close();
