@@ -50,7 +50,7 @@ async function createRoom(fast) {
   return (await r.json()).code;
 }
 async function waitFor(fn, ms = 20000, what = 'condition') {
-  const t0 = Date.now(); while (!fn()) { if (Date.now() - t0 > ms) throw new Error('timeout waiting for ' + what); await sleep(20); }
+  const t0 = Date.now(); await new Promise((r) => setImmediate(r)); while (!fn()) { if (Date.now() - t0 > ms) throw new Error('timeout waiting for ' + what); await sleep(20); }
 }
 
 async function fourHumans() {
@@ -98,7 +98,7 @@ async function fourHumans() {
       }
       const before = JSON.stringify(c.S.hand && [c.S.hand.phase, c.S.hand.turn, c.S.hand.trickCount, c.S.hand.trick.length, c.S.handNo, c.S.hand.bids.length]);
       c.send(a); actions++; acted = true;
-      await waitFor(() => JSON.stringify(cs[0].S.hand && [cs[0].S.hand.phase, cs[0].S.hand.turn, cs[0].S.hand.trickCount, cs[0].S.hand.trick.length, cs[0].S.handNo, cs[0].S.hand.bids.length]) !== before || cs[0].S.status !== 'playing', 10000, 'state change after ' + a.t);
+      await waitFor(() => JSON.stringify(c.S.hand && [c.S.hand.phase, c.S.hand.turn, c.S.hand.trickCount, c.S.hand.trick.length, c.S.handNo, c.S.hand.bids.length]) !== before || c.S.status !== 'playing', 10000, 'state change after ' + a.t);
       break;
     }
     if (!acted) await sleep(30);
